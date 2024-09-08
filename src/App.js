@@ -1,12 +1,12 @@
+import Board from "./components/Board.js";
 import Title from "./components/Title.js";
 
 function App() {
   return (
-    <div className="w-screen h-screen grid grid-rows-8 place-content-center">
+    <div className="w-screen h-screen grid grid-rows-12 place-items-center">
       <Title />
-      <div>
-
-      </div>
+      <Board />
+      <div></div>
     </div>
   );
 }
