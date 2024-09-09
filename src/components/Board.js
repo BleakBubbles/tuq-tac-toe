@@ -17,7 +17,14 @@ export default function Board() {
         { row: 3, col: 3, player: 0, id: "3,3" },
     ]);
 
-    function handleClick(tile) {
+    // useEffect(() => {
+    //     //check rows
+    //     for(let i = 0; i < 3; i++) {
+    //         if (board[i * 3].player === board[i * 3 + 1].player && board[i])
+    //     }
+    // })
+
+    const handleClick = (tile) => {
         setBoard(
             board.map((space) => {
                 if (space.id === tile.id) {
@@ -27,11 +34,12 @@ export default function Board() {
                 }
             })
         );
+        setPlayer1(!player1)
     }
     return (
         <div className="size-[72vh] row-span-9 grid grid-rows-3 grid-cols-3 place-items-center border-2 border-slate-200">
                 {board.map((space) => {
-                    return <Tile key={space.id} tile={space} handleClick={handleClick(space)} />;
+                    return <Tile key={space.id} tile={space} handleClick={() => handleClick(space)} />;
                 })}
         </div>
     );
