@@ -29,6 +29,7 @@ export default function Board() {
                     newBoard[i * 3 + 1].won = true;
                     newBoard[i * 3 + 2].won = true;
                     setBoard(newBoard);
+                    return;
                 }
             }
             //check columns
@@ -40,6 +41,7 @@ export default function Board() {
                     newBoard[i + 3].won = true;
                     newBoard[i + 6].won = true;
                     setBoard(newBoard);
+                    return;
                 }
             }
             //check diagonals
@@ -50,6 +52,7 @@ export default function Board() {
                 newboard[4].won = true;
                 newboard[8].won = true;
                 setBoard(newboard);
+                return;
             } else if (board[2].player && board[2].player === board[4].player && board[4].player === board[6].player) {
                 setWinner(board[2].player);
                 const newBoard = board.slice();
@@ -57,9 +60,10 @@ export default function Board() {
                 newBoard[4].won = true;
                 newBoard[6].won = true;
                 setBoard(newBoard)
+                return;
             }
             //check tie
-            if (!winner && board.every(tile => tile.player)) {
+            if (board.every(tile => tile.player)) {
                 setWinner(-1);
             }
         }
@@ -75,12 +79,11 @@ export default function Board() {
                 }
             })
         );
-        console.log(player1);
         setPlayer1(!player1);
     }
     return (
         <>
-            {winner ? <div className="absolute grid grid-rows-1 place-items-center z-10 w-full h-full backdrop-blur-[1vh]">
+            {winner ? <div className="absolute grid grid-rows-1 place-items-center z-10 w-[100vw] h-[100vh] backdrop-blur-[1vh]">
                 <div className="bg-slate-100 drop-shadow-[2vh] w-[36vh] h-[24vh] grid grid-rows-2 place-items-center text-[5vh] rounded-[2vh]">
                     {winner > 0 ? 
                     (winner === 1 ? "X wins!" : "O wins!") : "It's a tie!"}
@@ -97,7 +100,7 @@ export default function Board() {
             <div className="text-[3vh]">
                 Player: {player1 ? "X" : "O"}
             </div>
-            <div className="size-[72vh] row-span-9 grid grid-rows-3 grid-cols-3 place-items-center border-[1vh] border-slate-200">
+            <div className="size-[64vh] row-span-8 grid grid-rows-3 grid-cols-3 place-items-center border-[1vh] border-slate-200">
                 {board.map((space) => {
                     return <Tile key={space.id} player={space.player} won={space.won} handleClick={() => handleClick(space)} />;
                 })}
